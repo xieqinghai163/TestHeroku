@@ -1,0 +1,1 @@
+<footer><p><a href="mailto:xintong168@hotmail.com?Subject=Hello" target="_top">Contact Us</a></p></footer>

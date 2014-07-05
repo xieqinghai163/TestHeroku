@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script
+src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB-kuP8PgU7zsTI1RquIimIMfF0CdgUFeU&sensor=false">
+</script>
+
+<script>
+var address = "h4p 2b1";
+var mylat=51.508742;
+var mylng=-0.120850;
+
+var myCenter=new google.maps.LatLng(mylat,mylng);
+var marker;
+
+function getmylocation(){
+	var myLatLng = "";
+	var geo = new google.maps.Geocoder;
+	geo.geocode({'address':address},function(results, status){
+	 if (status == google.maps.GeocoderStatus.OK) {              
+			myLatLng = results[0].geometry.location; 
+			mylat=myLatLng.lat();
+			mylng=myLatLng.lng();
+			myCenter=new google.maps.LatLng(mylat,mylng);
+			initialize();
+	  } else {
+			alert("Geocode was not successful for the following reason: " + status);
+		}
+	});	
+}
+
+function initialize()
+{	
+	var mapProp = {
+	  center:myCenter,
+	  zoom:5,
+	  mapTypeId:google.maps.MapTypeId.ROADMAP
+	};
+	var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+	marker=new google.maps.Marker({
+	  position:myCenter,
+	  animation:google.maps.Animation.BOUNCE
+	});
+	marker.setMap(map);	
+}
+ 
+google.maps.event.addDomListener(window, 'load', getmylocation);
+</script>
+</head>
+
+<body>
+<div id="googleMap" style="width:500px;height:380px;"></div>
+</body>
+</html>
